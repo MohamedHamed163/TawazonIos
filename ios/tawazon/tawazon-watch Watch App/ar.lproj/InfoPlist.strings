@@ -1,0 +1,4 @@
+/* HealthKit Usage Descriptions - Arabic */
+"NSHealthShareUsageDescription" = "يحتاج توازن إلى الوصول إلى بيانات الصحة الخاصة بك لتتبع تقدمك الرياضي، بما في ذلك الخطوات ومعدل ضربات القلب والسعرات المحروقة.";
+"NSHealthUpdateUsageDescription" = "يحتاج توازن إلى إذن لتحديث بيانات الصحة الخاصة بك لمزامنة تقدم التمرين وإنجازاتك.";
+

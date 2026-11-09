@@ -1,0 +1,15 @@
+# Where the encrypted signing assets (one shared Apple Distribution cert +
+# the App Store provisioning profile for com.Tawazon) are stored.
+#
+# >>> CREATE THIS PRIVATE REPO FIRST and put its URL here. <<<
+# It must be EMPTY at first; `fastlane match appstore` populates it.
+git_url("https://github.com/KareemELadl/tawazon-ios-certs.git")
+
+storage_mode("git")
+type("appstore")
+
+app_identifier(["com.Tawazon"])
+team_id("97DNR5Y3Y5")
+
+# On CI we never want match to mint a new certificate — it only reads/installs
+# what was bootstrapped locally. The Fastfile sets readonly automatically via is_ci.

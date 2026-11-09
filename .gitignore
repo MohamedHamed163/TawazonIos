@@ -1,0 +1,11 @@
+# Xcode / SwiftPM
+**/xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Local build artifacts (CLI archives, IPAs, xcresult bundles, App Store Connect API keys)
+ios/tawazon/build/
+build/
+*.xcarchive
+*.ipa
+*.xcresult

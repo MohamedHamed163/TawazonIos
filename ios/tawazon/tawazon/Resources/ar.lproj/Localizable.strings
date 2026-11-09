@@ -1,0 +1,448 @@
+/* 
+  Localizable.strings (Arabic)
+  tawazon
+*/
+
+/* App Name */
+"app.name" = "توازن";
+"app.tagline" = "جسدك. مدربك. قواعدك.";
+
+/* Navigation */
+"nav.home" = "الرئيسية";
+"nav.coaches" = "المدربون";
+"nav.reels" = "مقاطع";
+"nav.messages" = "الرسائل";
+"nav.training" = "التدريب";
+"nav.meals" = "الوجبات";
+"nav.progress" = "التقدم";
+"nav.profile" = "الملف الشخصي";
+
+/* Authentication */
+"auth.login" = "تسجيل الدخول";
+"auth.signup" = "إنشاء حساب";
+"auth.email" = "البريد الإلكتروني";
+"auth.password" = "كلمة المرور";
+"auth.confirmPassword" = "تأكيد كلمة المرور";
+"auth.fullName" = "الاسم الكامل";
+"auth.createAccount" = "إنشاء حساب";
+"auth.joinMessage" = "انضم إلى توازن وابدأ رحلتك الرياضية";
+"auth.noAccount" = "ليس لديك حساب؟";
+"auth.haveAccount" = "لديك حساب بالفعل؟";
+"auth.forgotPassword" = "نسيت كلمة المرور؟";
+"auth.enterEmail" = "أدخل بريدك الإلكتروني";
+"auth.enterPassword" = "أدخل كلمة المرور";
+"auth.enterFullName" = "أدخل اسمك الكامل";
+"auth.minPassword" = "8 أحرف على الأقل";
+"auth.role.user" = "التدرب مع المدربين";
+"auth.role.coach" = "كن مدرباً";
+"auth.passwordsNotMatch" = "كلمات المرور غير متطابقة";
+"auth.iWantTo" = "أريد أن";
+"auth.or" = "أو";
+"auth.signInApple" = "تسجيل الدخول باستخدام Apple";
+"auth.signUpApple" = "إنشاء حساب باستخدام Apple";
+"auth.signInGoogle" = "تسجيل الدخول باستخدام Google";
+"auth.signUpGoogle" = "إنشاء حساب باستخدام Google";
+"auth.faceID" = "بصمة الوجه";
+"auth.touchID" = "بصمة الإصبع";
+
+/* Home */
+"home.welcome" = "مرحباً بعودتك";
+"home.yourBody" = "جسدك.";
+"home.yourCoach" = "مدربك.";
+"home.yourRules" = "قواعدك.";
+"home.heroDescription" = "تواصل مع مدربين محترفين، احصل على فيديوهات تدريب مخصصة، خطط وجبات مصممة لك، وتتبع تقدمك - كل ذلك في تطبيق واحد.";
+"home.startTraining" = "ابدأ التدريب";
+"home.browseCoaches" = "تصفح المدربين";
+"home.continueJourney" = "تابع رحلتك الإبداعية وتعاون مع الفنانين حول العالم";
+"home.search" = "ابحث عن المشاريع والفنانين...";
+"home.quickActions" = "إجراءات سريعة";
+"home.newProject" = "مشروع جديد";
+"home.inviteFriends" = "دعوة الأصدقاء";
+"home.shareWork" = "مشاركة العمل";
+"home.explore" = "استكشف";
+"home.recentProjects" = "المشاريع الأخيرة";
+"home.featuredCommunity" = "المجتمع المميز";
+"home.seeAll" = "عرض الكل";
+"home.viewAll" = "عرض الكل";
+"home.todaysWorkout" = "تمرين اليوم";
+"home.featuredCoaches" = "المدربون المميزون";
+"home.recentProgress" = "التقدم الأخير";
+
+/* Progress */
+"progress.title" = "التقدم";
+"progress.week" = "أسبوع";
+"progress.month" = "شهر";
+"progress.year" = "سنة";
+"progress.steps" = "خطوات";
+"progress.calories" = "سعرات حرارية";
+"progress.heartRate" = "معدل ضربات القلب";
+"progress.todaysHealthData" = "بيانات الصحة اليوم";
+"progress.inBodyProgress" = "تقدم InBody";
+"progress.progressCharts" = "مخططات التقدم";
+"progress.bodyMetrics" = "قياسات الجسم";
+"progress.recentWorkouts" = "التدريبات الأخيرة";
+"progress.weight" = "الوزن";
+"progress.bodyFat" = "نسبة الدهون";
+"progress.muscleMass" = "كتلة العضلات";
+"progress.bodyWater" = "نسبة الماء";
+"progress.weightTrend" = "اتجاه الوزن";
+"progress.bodyFatPercent" = "نسبة الدهون %";
+"progress.bmi" = "مؤشر كتلة الجسم";
+"progress.bmr" = "معدل الأيض";
+"progress.visceralFat" = "الدهون الحشوية";
+"progress.boneMass" = "كتلة العظام";
+"progress.current" = "الحالي";
+"progress.target" = "الهدف";
+"progress.loading" = "جاري التحميل...";
+
+/* Workouts */
+"workout.upperBody" = "الجزء العلوي";
+"workout.cardio" = "كارديو";
+"workout.lowerBody" = "الجزء السفلي";
+"workout.hiit" = "تدريب متقطع";
+"workout.yoga" = "يوغا";
+"workout.pilates" = "بيلاتيس";
+"workout.strength" = "قوة";
+"workout.start" = "ابدأ";
+"workout.stop" = "توقف";
+
+/* HealthKit */
+"healthkit.permissionRequired" = "إذن HealthKit مطلوب";
+"healthkit.permissionMessage" = "يرجى السماح بالوصول إلى HealthKit لعرض بيانات الصحة الخاصة بك.";
+
+/* Common */
+"common.ok" = "موافق";
+"common.cancel" = "إلغاء";
+"common.save" = "حفظ";
+"common.delete" = "حذف";
+"common.edit" = "تعديل";
+"workout.upperBodyStrength" = "قوة الجزء العلوي";
+"workout.benchPress" = "تمرين الضغط";
+"workout.shoulderPress" = "ضغط الكتف";
+"workout.pullUps" = "العقلة";
+"workout.exercises" = "تمارين";
+"workout.minutes" = "دقائق";
+"workout.daysAgo" = "أيام مضت";
+
+/* Coaches */
+"coaches.title" = "المدربون";
+"coaches.featured" = "المدربون المميزون";
+"coaches.all" = "جميع المدربين";
+"coaches.filter" = "تصفية";
+"coaches.specialty" = "التخصص";
+"coaches.rating" = "التقييم";
+
+/* Meals */
+"meals.title" = "خطط الوجبات";
+"meals.breakfast" = "الفطور";
+"meals.lunch" = "الغداء";
+"meals.dinner" = "العشاء";
+"meals.snacks" = "الوجبات الخفيفة";
+"meals.calories" = "السعرات";
+"meals.protein" = "البروتين";
+"meals.carbs" = "الكربوهيدرات";
+"meals.fat" = "الدهون";
+"meals.today" = "وجبات اليوم";
+"meals.customPlan" = "خطة وجبات مخصصة";
+"meals.customPlans" = "الخطط المخصصة";
+
+/* Training */
+"training.title" = "التدريب";
+"training.myPrograms" = "برامجي";
+"training.browse" = "تصفح";
+"training.favorites" = "المفضلة";
+"training.history" = "السجل";
+
+/* Profile */
+"profile.title" = "الملف الشخصي";
+"profile.edit" = "تعديل الملف الشخصي";
+"profile.workouts" = "التدريبات";
+"profile.totalHours" = "إجمالي الساعات";
+"profile.weeks" = "أسابيع";
+"profile.followers" = "المتابعون";
+"profile.following" = "يتابع";
+"profile.achievements" = "الإنجازات";
+"profile.firstWorkout" = "أول تمرين";
+"profile.tenWorkouts" = "10 تمارين";
+"profile.thirtyDays" = "30 يوم";
+"profile.hundredHours" = "100 ساعة";
+"profile.sixMonths" = "6 أشهر";
+"profile.accountSettings" = "إعدادات الحساب";
+"profile.notifications" = "الإشعارات";
+"profile.privacy" = "الخصوصية والأمان";
+"profile.appearance" = "المظهر";
+"profile.language" = "اللغة";
+"profile.help" = "المساعدة والدعم";
+"profile.about" = "حول توازن";
+"profile.signOut" = "تسجيل الخروج";
+"profile.theme" = "المظهر";
+"profile.fitnessEnthusiast" = "عاشق اللياقة";
+
+/* Settings */
+"settings.title" = "الإعدادات";
+"settings.language" = "اللغة";
+"settings.theme" = "المظهر";
+"settings.theme.system" = "النظام";
+"settings.theme.light" = "فاتح";
+"settings.theme.dark" = "داكن";
+"settings.genderTheme" = "مظهر الألوان";
+"settings.genderTheme.male" = "ذكوري";
+"settings.genderTheme.female" = "أنثوي";
+"settings.genderTheme.neutral" = "محايد";
+"settings.appearanceMode" = "المظهر";
+
+/* Common */
+"common.cancel" = "إلغاء";
+"common.save" = "حفظ";
+"common.delete" = "حذف";
+"common.edit" = "تعديل";
+"common.close" = "إغلاق";
+"common.next" = "التالي";
+"common.back" = "رجوع";
+"common.done" = "تم";
+"common.loading" = "جاري التحميل...";
+"common.error" = "خطأ";
+"common.success" = "نجح";
+"common.required" = "مطلوب";
+"common.optional" = "اختياري";
+"common.all" = "الكل";
+"common.active" = "نشط";
+"common.filter" = "تصفية";
+"common.retry" = "إعادة المحاولة";
+"common.view" = "عرض الملف الشخصي";
+"common.showAll" = "عرض الكل";
+"common.showLess" = "عرض أقل";
+
+/* Health */
+"health.connect" = "ربط Apple Health";
+"health.connectDescription" = "اربط بيانات Apple Health لتتبع تقدمك الرياضي تلقائياً، بما في ذلك الخطوات ومعدل ضربات القلب والسعرات المحروقة.";
+"health.trackDescription" = "تتبع خطواتك ومعدل ضربات قلبك والسعرات المحروقة تلقائياً.";
+"health.steps" = "الخطوات";
+"health.calories" = "السعرات الحرارية";
+"health.caloriesBurned" = "السعرات المحروقة";
+"health.heartRate" = "معدل ضربات القلب";
+"health.distance" = "المسافة";
+"health.avgHeartRate" = "متوسط معدل ضربات القلب";
+"health.skip" = "تخطي الآن";
+
+/* Stats */
+"stats.calories" = "السعرات الحرارية";
+"stats.minutes" = "الدقائق";
+"stats.workouts" = "التدريبات";
+"stats.steps" = "الخطوات";
+"stats.heartRate" = "معدل ضربات القلب";
+"stats.distance" = "المسافة";
+"stats.kcal" = "سعرة";
+"stats.km" = "كم";
+"stats.bpm" = "نبضة/د";
+
+/* Units */
+"units.kg" = "كجم";
+"units.lbs" = "رطل";
+"units.cm" = "سم";
+"units.percent" = "%";
+"units.kcal" = "سعرة";
+"units.min" = "دقيقة";
+
+/* Time */
+"time.today" = "اليوم";
+"time.yesterday" = "أمس";
+"time.thisWeek" = "هذا الأسبوع";
+"time.daysAgo" = "منذ %d أيام";
+"time.weeksAgo" = "منذ %d أسابيع";
+"time.monthsAgo" = "منذ %d أشهر";
+
+
+/* Landing */
+"landing.getStarted" = "ابدأ الآن";
+"landing.startTraining" = "ابدأ التمرين";
+"landing.featuresTitle" = "لماذا توازن";
+"landing.feature.coaches" = "مدربون خبراء";
+"landing.feature.coaches.sub" = "محترفون معتمدون وفق أهدافك.";
+"landing.feature.training" = "تدريب بالفيديو";
+"landing.feature.training.sub" = "برامج منظمة وتمارين موجهة.";
+"landing.feature.meals" = "خطط وجبات";
+"landing.feature.meals.sub" = "تغذية تتماشى مع تدريبك.";
+"landing.feature.progress" = "تتبع التقدم";
+"landing.feature.progress.sub" = "سجلات ومؤشرات ومتابعة.";
+
+/* Guest */
+"guest.signInTitle" = "سجّل الدخول للوحة التحكم";
+"guest.signInBody" = "سجّل الدخول لعرض تمرين اليوم والاشتراكات والمحتوى الشخصي.";
+"guest.profileTitle" = "الملف الشخصي";
+"guest.profileBody" = "سجّل الدخول لعرض حسابك والاشتراكات والسجل الصحي.";
+
+/* Home */
+"home.activePlan" = "الخطة النشطة";
+"home.daysRemaining" = "%d يوم متبقية";
+"home.healthUpdateTitle" = "حدّث سجلك الصحي";
+"home.healthUpdateBody" = "ساعد مدربك بأحدث القياسات والملاحظات.";
+"home.exerciseCountFormat" = "%d تمرين";
+"home.startWorkout" = "ابدأ التمرين";
+"home.noWorkoutToday" = "لا يوجد تمرين مجدول اليوم.";
+"home.streakDays" = "أيام متتالية للتسجيل";
+"home.noFeatured" = "اشترك مع مدرب للحصول على توصيات شخصية.";
+
+/* Today workout */
+"today.workouts" = "التدريبات";
+"today.meals" = "خطط الوجبات";
+"today.complete" = "إكمال";
+"today.skip" = "تخطي اليوم";
+"today.video" = "فيديو";
+"today.noProgramTitle" = "لا يوجد برنامج بعد";
+"today.noProgramBody" = "لم يقم مدربك بتعيين برنامج تدريب لك بعد. تفقّد لاحقاً أو تواصل مع مدربك.";
+
+/* Coach */
+"coach.plans" = "الخطط";
+"coach.subscribe" = "اشترك";
+"coach.planPrice" = "%d شهر · %.0f ج.م";
+"coach.certifications" = "الشهادات";
+"coach.certCount" = "%d شهادات";
+
+
+/* Notifications */
+"notifications.title" = "الإشعارات";
+"notifications.markAll" = "تعليم الكل كمقروء";
+"notifications.emptyTitle" = "لا جديد لديك";
+"notifications.emptyBody" = "ستظهر هنا تحديثات مدربك والتذكيرات.";
+
+/* Health */
+"health.title" = "السجل الصحي";
+"health.step" = "خطوة";
+"health.submit" = "إرسال";
+"health.successTitle" = "تم الإرسال";
+"health.successBody" = "تم إرسال سجلك الصحي إلى مدربيك.";
+"health.height" = "الطول (سم)";
+"health.age" = "العمر";
+"health.gender" = "الجنس";
+"health.gender.hint" = "اختر الجنس";
+"health.gender.male" = "ذكر";
+"health.gender.female" = "أنثى";
+"health.gender.other" = "آخر";
+"health.gender.preferNot" = "أفضل عدم الإفصاح";
+"health.fitnessGoals" = "أهداف اللياقة";
+"health.medical" = "الحالات الطبية";
+"health.allergies" = "الحساسية";
+"health.notesToCoach" = "ملاحظات للمدرب";
+"health.addPdf" = "إضافة PDF إن بودي";
+"health.pdfSelected" = "تم اختيار PDF";
+"health.addPhoto" = "إضافة صورة تقدم";
+"health.photoCount" = "%d صور مختارة";
+"health.measure.waist" = "الخصر";
+"health.measure.chest" = "الصدر";
+"health.measure.leftArm" = "الذراع الأيسر";
+"health.measure.rightArm" = "الذراع الأيمن";
+"health.measure.leftThigh" = "الفخذ الأيسر";
+"health.measure.rightThigh" = "الفخذ الأيمن";
+"health.measure.hips" = "الأرداف";
+"health.measure.neck" = "الرقبة";
+
+/* Profile */
+"profile.healthRecord" = "السجل الصحي";
+"profile.healthRecordUpdate" = "حدّث أحدث القياسات والملفات.";
+"profile.healthRecordAdd" = "شارك القياسات والتقدم مع مدربك.";
+"profile.healthRecordCta" = "فتح السجل الصحي";
+"profile.subscriptions" = "الاشتراكات";
+"profile.noSubscriptions" = "لا توجد اشتراكات نشطة بعد.";
+"profile.plan" = "الخطة";
+
+/* Theme */
+"theme.dark" = "داكن";
+"theme.light" = "فاتح";
+
+/* Coaches */
+"coaches.searchPlaceholder" = "ابحث عن المدربين";
+
+
+/* Client features (meals, programs, content, progress, chat) */
+"meals.snack" = "وجبة خفيفة";
+"meals.noPlanTitle" = "لا توجد خطة نشطة";
+"meals.noPlanBody" = "لم يقم مدربك بتعيين خطة بعد.";
+"meals.noMealsTitle" = "لا توجد وجبات بعد";
+"meals.noMealsBody" = "لم يضف مدربك وجبات إلى خطتك بعد.";
+"meals.noMealsForDay" = "لا توجد وجبات مجدولة لهذا اليوم.";
+"meals.howToPrepare" = "طريقة التحضير";
+"meals.item" = "عنصر";
+"meals.or" = "أو:";
+"meals.day.mon" = "الاثنين";
+"meals.day.tue" = "الثلاثاء";
+"meals.day.wed" = "الأربعاء";
+"meals.day.thu" = "الخميس";
+"meals.day.fri" = "الجمعة";
+"meals.day.sat" = "السبت";
+"meals.day.sun" = "الأحد";
+
+"programs.title" = "البرامج";
+"programs.empty" = "لا توجد برامج متاحة بعد.";
+"programs.emptyTitle" = "لا توجد برامج بعد";
+"programs.emptyBody" = "لم يسند مدربك أي برنامج بعد. سيظهر هنا بمجرد إسناده.";
+"programs.weeks" = "أسابيع";
+"programs.workouts" = "تمارين";
+"programs.workoutsTitle" = "التمارين";
+"programs.dietTitle" = "خطط الطعام";
+"programs.detailTitle" = "البرنامج";
+
+"content.title" = "نصائح تدريبية";
+"content.empty" = "لا توجد مقاطع فيديو متاحة بعد.";
+"content.emptyTitle" = "لا توجد نصائح بعد";
+"content.emptyBody" = "لم يشارك مدربك أي نصائح تدريبية بعد. تحقق لاحقًا.";
+
+"progress.change" = "التغير";
+"progress.weightHistory" = "سجل الوزن";
+"progress.notEnoughData" = "سجّل المزيد من القياسات لرؤية اتجاهك.";
+"progress.measurements" = "قياسات الجسم";
+"progress.photos" = "صور التقدم";
+"progress.first" = "الأولى";
+"progress.latest" = "الأحدث";
+
+"chat.title" = "الرسائل";
+"chat.empty" = "لا توجد محادثات بعد.";
+"chat.coach" = "المدرب";
+"chat.attachment" = "مرفق";
+"chat.playVoice" = "تشغيل المقطع الصوتي";
+"chat.playVideo" = "تشغيل الفيديو";
+"chat.messagePlaceholder" = "رسالة…";
+"chat.typing" = "يكتب…";
+"chat.read" = "تمت القراءة";
+
+"home.viewMeals" = "عرض الوجبات";
+"home.messageCoach" = "مراسلة المدرب";
+"home.programs" = "البرامج";
+"home.content" = "نصائح";
+"home.progress" = "التقدم";
+
+/* Accessibility */
+"a11y.toggleLanguage" = "تبديل اللغة";
+"a11y.notifications" = "الإشعارات";
+"a11y.playVideo" = "تشغيل فيديو التمرين";
+
+/* Progress chart range */
+"progress.all" = "الكل";
+
+/* Active workout logging */
+"log.title" = "تسجيل التمرين";
+"log.start" = "ابدأ التمرين";
+"log.set" = "المجموعة";
+"log.weight" = "الوزن";
+"log.reps" = "التكرارات";
+"log.kg" = "كجم";
+"log.addSet" = "إضافة مجموعة";
+"log.rest" = "راحة";
+"log.skipRest" = "تخطّي الراحة";
+"log.addRest" = "+%dث";
+"log.finish" = "إنهاء التمرين";
+"log.next" = "التمرين التالي";
+"log.previous" = "السابق";
+"log.swap" = "استبدال التمرين";
+"log.watchVideo" = "مشاهدة الفيديو";
+"log.swapTitle" = "استبدل بـ";
+"log.noAlternatives" = "لا توجد تمارين بديلة متاحة.";
+"log.notes" = "ملاحظات";
+"log.notesHint" = "كيف شعرت في هذا التمرين؟";
+"log.exerciseProgress" = "تمرين %1$d من %2$d";
+"log.setDone" = "تم";
+"log.target" = "الهدف: %1$d × %2$d";
+"log.empty" = "لا توجد تمارين لتسجيلها.";
+"log.summaryTitle" = "اكتمل التمرين";
+"log.summarySets" = "تم تسجيل %d مجموعة";
+"log.summaryDone" = "تم";

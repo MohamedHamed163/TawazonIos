@@ -1,0 +1,4 @@
+/* HealthKit Usage Descriptions - English */
+"NSHealthShareUsageDescription" = "Tawazon needs access to your health data to track your fitness progress, including steps, heart rate, and calories burned.";
+"NSHealthUpdateUsageDescription" = "Tawazon needs permission to update your health data to sync your workout progress and achievements.";
+

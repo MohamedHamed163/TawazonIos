@@ -1,0 +1,220 @@
+/* 
+  Localizable.strings (English)
+  tawazon
+*/
+
+/* App Name */
+"app.name" = "Tawazon";
+"app.tagline" = "Your Body. Your Coach. Your Rules.";
+
+/* Navigation */
+"nav.home" = "Home";
+"nav.coaches" = "Coaches";
+"nav.training" = "Training";
+"nav.meals" = "Meals";
+"nav.progress" = "Progress";
+"nav.profile" = "Profile";
+
+/* Authentication */
+"auth.login" = "Log In";
+"auth.signup" = "Sign Up";
+"auth.email" = "Email";
+"auth.password" = "Password";
+"auth.confirmPassword" = "Confirm Password";
+"auth.fullName" = "Full Name";
+"auth.createAccount" = "Create Account";
+"auth.joinMessage" = "Join Tawazon and start your fitness journey";
+"auth.noAccount" = "Don't have an account?";
+"auth.haveAccount" = "Already have an account?";
+"auth.forgotPassword" = "Forgot Password?";
+"auth.enterEmail" = "Enter your email";
+"auth.enterPassword" = "Enter your password";
+"auth.enterFullName" = "Enter your full name";
+"auth.minPassword" = "Minimum 8 characters";
+"auth.role.user" = "Train with coaches";
+"auth.role.coach" = "Be a coach";
+"auth.passwordsNotMatch" = "Passwords do not match";
+"auth.iWantTo" = "I want to";
+
+/* Home */
+"home.welcome" = "Welcome Back";
+"home.yourBody" = "Your Body.";
+"home.yourCoach" = "Your Coach.";
+"home.yourRules" = "Your Rules.";
+"home.heroDescription" = "Connect with elite coaches, get personalized training videos, custom meal plans, and track your InBody progress — all in one app.";
+"home.startTraining" = "Start Training";
+"home.browseCoaches" = "Browse Coaches";
+"home.continueJourney" = "Continue your creative journey and collaborate with artists worldwide";
+"home.search" = "Search projects, artists...";
+"home.quickActions" = "Quick Actions";
+"home.newProject" = "New Project";
+"home.inviteFriends" = "Invite Friends";
+"home.shareWork" = "Share Work";
+"home.explore" = "Explore";
+"home.recentProjects" = "Recent Projects";
+"home.featuredCommunity" = "Featured Community";
+"home.seeAll" = "See All";
+"home.viewAll" = "View All";
+"home.todaysWorkout" = "Today's Workout";
+"home.featuredCoaches" = "Featured Coaches";
+"home.recentProgress" = "Recent Progress";
+
+/* Progress */
+"progress.title" = "Progress";
+"progress.week" = "Week";
+"progress.month" = "Month";
+"progress.year" = "Year";
+"progress.todaysHealthData" = "Today's Health Data";
+"progress.inBodyProgress" = "InBody Progress";
+"progress.progressCharts" = "Progress Charts";
+"progress.bodyMetrics" = "Body Metrics";
+"progress.recentWorkouts" = "Recent Workouts";
+"progress.weight" = "Weight";
+"progress.bodyFat" = "Body Fat";
+"progress.muscleMass" = "Muscle Mass";
+"progress.bodyWater" = "Body Water";
+"progress.weightTrend" = "Weight Trend";
+"progress.bodyFatPercent" = "Body Fat %";
+"progress.bmi" = "BMI";
+"progress.bmr" = "BMR";
+"progress.visceralFat" = "Visceral Fat";
+"progress.boneMass" = "Bone Mass";
+"progress.current" = "Current";
+"progress.target" = "Target";
+"progress.loading" = "Loading...";
+
+/* Workouts */
+"workout.upperBody" = "Upper Body";
+"workout.cardio" = "Cardio";
+"workout.lowerBody" = "Lower Body";
+"workout.hiit" = "HIIT";
+"workout.yoga" = "Yoga";
+"workout.pilates" = "Pilates";
+"workout.strength" = "Strength";
+"workout.upperBodyStrength" = "Upper Body Strength";
+"workout.benchPress" = "Bench Press";
+"workout.shoulderPress" = "Shoulder Press";
+"workout.pullUps" = "Pull-ups";
+"workout.exercises" = "exercises";
+"workout.minutes" = "minutes";
+"workout.daysAgo" = "days ago";
+
+/* Coaches */
+"coaches.title" = "Coaches";
+"coaches.featured" = "Featured Coaches";
+"coaches.all" = "All Coaches";
+"coaches.filter" = "Filter";
+"coaches.specialty" = "Specialty";
+"coaches.rating" = "Rating";
+
+/* Meals */
+"meals.title" = "Meal Plans";
+"meals.breakfast" = "Breakfast";
+"meals.lunch" = "Lunch";
+"meals.dinner" = "Dinner";
+"meals.snacks" = "Snacks";
+"meals.calories" = "Calories";
+"meals.protein" = "Protein";
+"meals.carbs" = "Carbs";
+"meals.fat" = "Fat";
+
+/* Training */
+"training.title" = "Training";
+"training.myPrograms" = "My Programs";
+"training.browse" = "Browse";
+"training.favorites" = "Favorites";
+"training.history" = "History";
+
+/* Profile */
+"profile.title" = "Profile";
+"profile.edit" = "Edit Profile";
+"profile.workouts" = "Workouts";
+"profile.totalHours" = "Total Hours";
+"profile.weeks" = "Weeks";
+"profile.followers" = "Followers";
+"profile.following" = "Following";
+"profile.achievements" = "Achievements";
+"profile.firstWorkout" = "First Workout";
+"profile.tenWorkouts" = "10 Workouts";
+"profile.thirtyDays" = "30 Days";
+"profile.hundredHours" = "100 Hours";
+"profile.sixMonths" = "6 Months";
+"profile.accountSettings" = "Account Settings";
+"profile.notifications" = "Notifications";
+"profile.privacy" = "Privacy & Security";
+"profile.appearance" = "Appearance";
+"profile.language" = "Language";
+"profile.help" = "Help & Support";
+"profile.about" = "About Tawazon";
+"profile.signOut" = "Sign Out";
+"profile.theme" = "Theme";
+"profile.fitnessEnthusiast" = "Fitness Enthusiast";
+
+/* Settings */
+"settings.title" = "Settings";
+"settings.language" = "Language";
+"settings.theme" = "Theme";
+"settings.theme.system" = "System";
+"settings.theme.light" = "Light";
+"settings.theme.dark" = "Dark";
+"settings.genderTheme" = "Color Theme";
+"settings.genderTheme.male" = "Male";
+"settings.genderTheme.female" = "Female";
+"settings.genderTheme.neutral" = "Neutral";
+
+/* Common */
+"common.cancel" = "Cancel";
+"common.save" = "Save";
+"common.delete" = "Delete";
+"common.edit" = "Edit";
+"common.close" = "Close";
+"common.next" = "Next";
+"common.back" = "Back";
+"common.done" = "Done";
+"common.loading" = "Loading...";
+"common.error" = "Error";
+"common.success" = "Success";
+"common.required" = "Required";
+"common.optional" = "Optional";
+"common.all" = "All";
+"common.active" = "Active";
+"common.filter" = "Filter";
+
+/* Health */
+"health.connect" = "Connect Apple Health";
+"health.connectDescription" = "Connect your Apple Health data to automatically track your fitness progress, including steps, heart rate, and calories burned.";
+"health.trackDescription" = "Track your steps, heart rate, and calories burned automatically.";
+"health.steps" = "Steps";
+"health.calories" = "Calories";
+"health.caloriesBurned" = "Calories Burned";
+"health.heartRate" = "Heart Rate";
+"health.distance" = "Distance";
+"health.avgHeartRate" = "Avg Heart Rate";
+"health.skip" = "Skip for now";
+
+/* Stats */
+"stats.calories" = "Calories";
+"stats.minutes" = "Minutes";
+"stats.workouts" = "Workouts";
+"stats.steps" = "Steps";
+"stats.heartRate" = "Heart Rate";
+"stats.distance" = "Distance";
+"stats.kcal" = "kcal";
+"stats.km" = "km";
+"stats.bpm" = "bpm";
+
+/* Units */
+"units.kg" = "kg";
+"units.lbs" = "lbs";
+"units.cm" = "cm";
+"units.percent" = "%";
+"units.kcal" = "kcal";
+"units.min" = "min";
+
+/* Time */
+"time.today" = "Today";
+"time.yesterday" = "Yesterday";
+"time.daysAgo" = "%d days ago";
+"time.weeksAgo" = "%d weeks ago";
+"time.monthsAgo" = "%d months ago";
+

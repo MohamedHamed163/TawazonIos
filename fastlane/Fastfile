@@ -1,0 +1,99 @@
+default_platform(:ios)
+
+PROJECT  = "ios/tawazon/tawazon.xcodeproj"
+SCHEME   = "tawazon"
+APP_ID   = "com.Tawazon"
+TEAM_ID  = "97DNR5Y3Y5"
+PROFILE  = "match AppStore #{APP_ID}" # match names profiles "match AppStore <bundle id>"
+
+def asc_api_key
+  app_store_connect_api_key(
+    key_id:       ENV.fetch("APP_STORE_CONNECT_API_KEY_ID"),
+    issuer_id:    ENV.fetch("APP_STORE_CONNECT_API_ISSUER_ID"),
+    key_filepath: ENV.fetch("API_KEY_PATH")
+  )
+end
+
+platform :ios do
+  desc "ONE-TIME, run locally: create the shared cert + App Store profile and push them to the match repo"
+  lane :bootstrap_signing do
+    match(
+      type:           "appstore",
+      app_identifier: APP_ID,
+      readonly:       false,
+      api_key:        asc_api_key
+    )
+  end
+
+  desc "Re-mint the shared cert + App Store profile after the old cert was revoked/expired, then push to the match repo. Uses the ASC API key — no interactive Apple ID login."
+  lane :refresh_signing do
+    match(
+      type:           "appstore",
+      app_identifier: APP_ID,
+      readonly:       false,
+      force:          true, # regenerate the profile too — the old one points at the dead cert
+      api_key:        asc_api_key
+    )
+  end
+
+  desc "Build a Release archive and upload it to TestFlight"
+  lane :beta do
+    api_key = asc_api_key
+
+    # On CI, create + unlock a dedicated temporary keychain. Without this, match
+    # installs the distribution cert into the runner's login keychain and the
+    # codesign step blocks forever on an (invisible) "allow keychain access" GUI
+    # prompt — the build then hangs until the job timeout. setup_ci also lets
+    # match set the key partition list so codesign can use the key headlessly.
+    setup_ci if is_ci
+
+    # Install the shared Apple Distribution certificate + the App Store profile.
+    # readonly on CI => a runner can NEVER create a new certificate (this is the
+    # whole fix for the "maximum number of certificates" error).
+    match(
+      type:           "appstore",
+      app_identifier: APP_ID,
+      readonly:       is_ci,
+      api_key:        api_key
+    )
+
+    # Force manual signing onto ONLY the app target. Doing this globally via
+    # xcargs applied PROVISIONING_PROFILE_SPECIFIER to every Swift Package
+    # dependency too (GoogleSignIn, GoogleUtilities, AppAuth, Promises, ...),
+    # which fail to build because library targets don't support provisioning
+    # profiles. Scoping to the `tawazon` target leaves the packages on their
+    # default signing. The pbxproj edit is ephemeral on the CI checkout.
+    # match exports the ACTUAL installed profile name here. It can carry a unique
+    # suffix (e.g. "match AppStore com.Tawazon 1783609129") when the Dev Portal
+    # already had a profile of the base name at mint time, so read the real name
+    # from match rather than assuming PROFILE. (droob's Fastfile does the same.)
+    installed_profile = ENV["sigh_#{APP_ID}_appstore_profile-name"] || PROFILE
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path:                  PROJECT,
+      targets:               [SCHEME],
+      team_id:               TEAM_ID,
+      code_sign_identity:    "Apple Distribution",
+      bundle_identifier:     APP_ID,
+      profile_name:          installed_profile
+    )
+
+    build_app(
+      project:          PROJECT,
+      scheme:           SCHEME,
+      configuration:    "Release",
+      export_method:    "app-store",
+      output_directory: "build",
+      output_name:      "tawazon.ipa",
+      export_options: {
+        provisioningProfiles: { APP_ID => installed_profile }
+      }
+    )
+
+    upload_to_testflight(
+      api_key: api_key,
+      skip_waiting_for_build_processing: true
+    )
+  end
+end

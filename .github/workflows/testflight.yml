@@ -1,0 +1,141 @@
+name: iOS TestFlight
+
+on:
+  workflow_dispatch:           # manual trigger from the Actions tab
+  push:
+    branches: [main]           # also auto-deploy on every push to main
+    paths:
+      - 'ios/**'
+      - '.github/workflows/testflight.yml'
+
+env:
+  # Apple requires Xcode 26 / iOS 26 SDK for App Store Connect uploads (as of 2026).
+  XCODE_MAJOR: '26'
+  SCHEME: 'tawazon'
+  PROJECT: 'ios/tawazon/tawazon.xcodeproj'
+  CONFIGURATION: 'Release'
+  ARCHIVE_PATH: 'build/tawazon.xcarchive'
+  EXPORT_PATH: 'build/export'
+  EXPORT_OPTIONS: '.github/ExportOptions.plist'
+
+jobs:
+  testflight:
+    name: Build & upload to TestFlight
+    runs-on: macos-15
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select latest Xcode ${{ env.XCODE_MAJOR }}.x
+        run: |
+          set -euo pipefail
+          XCODE=$(ls -d /Applications/Xcode_${XCODE_MAJOR}*.app 2>/dev/null | sort -V | tail -1)
+          if [ -z "$XCODE" ]; then
+            echo "::error::No Xcode ${XCODE_MAJOR}.x found on runner. Available:"
+            ls -d /Applications/Xcode_*.app
+            exit 1
+          fi
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
+
+      # Xcode 26+ on macos-15 runners may not have the iOS device SDK preinstalled.
+      # `xcodebuild -downloadPlatform iOS` needs the CoreSimulator service running
+      # (yes, even for device-only builds) or it errors with "Unable to connect to
+      # simulator". So we kick the service first, then download.
+      - name: Ensure iOS platform present
+        run: |
+          set -euo pipefail
+          sudo xcodebuild -runFirstLaunch
+
+          if xcodebuild -showsdks 2>/dev/null | grep -q "^iphoneos"; then
+            echo "iOS device SDK already installed:"
+            xcodebuild -showsdks | grep -i iphoneos || true
+            exit 0
+          fi
+
+          echo "iOS device SDK missing — booting CoreSimulator service then downloading..."
+          # Force the CoreSimulator service to launch.
+          sudo launchctl kickstart -k "system/com.apple.CoreSimulator.CoreSimulatorService" 2>/dev/null || true
+          xcrun simctl list runtimes >/dev/null 2>&1 || true
+
+          # Retry downloadPlatform up to 3 times — the first attempt sometimes loses
+          # the simulator-service handshake while the service is still warming up.
+          for attempt in 1 2 3; do
+            echo "downloadPlatform attempt $attempt..."
+            if xcodebuild -downloadPlatform iOS; then
+              echo "iOS platform installed."
+              exit 0
+            fi
+            echo "Attempt $attempt failed, waiting 15s before retry..."
+            sleep 15
+            sudo launchctl kickstart -k "system/com.apple.CoreSimulator.CoreSimulatorService" 2>/dev/null || true
+          done
+
+          echo "::error::Failed to install iOS platform after 3 attempts"
+          exit 1
+
+      # ── Install the App Store Connect API key so xcodebuild + altool can use it ──
+      - name: Install App Store Connect API key
+        env:
+          APP_STORE_CONNECT_API_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}
+          APP_STORE_CONNECT_API_KEY_ID:     ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.appstoreconnect/private_keys
+          echo "$APP_STORE_CONNECT_API_KEY_BASE64" | base64 --decode \
+            > ~/.appstoreconnect/private_keys/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8
+          # Also stash a plain path for xcodebuild's -authenticationKeyPath flag
+          echo "API_KEY_PATH=$HOME/.appstoreconnect/private_keys/AuthKey_${APP_STORE_CONNECT_API_KEY_ID}.p8" >> $GITHUB_ENV
+
+      # ── Bump build number ──
+      # We use the GitHub Actions run number, offset by 100 to stay safely above any
+      # build numbers that already exist in TestFlight from before CI was wired up.
+      # This is monotonically increasing per push, so TestFlight never sees a duplicate.
+      - name: Bump build number
+        run: |
+          set -euo pipefail
+          NEXT=$(( ${{ github.run_number }} + 100 ))
+          echo "New build number: $NEXT"
+          cd ios/tawazon
+          xcrun agvtool new-version -all "$NEXT"
+
+      # ── match + gym + pilot ──
+      # match installs the ONE shared Apple Distribution cert + App Store profile
+      # (readonly, so a runner never creates a certificate). gym archives + exports
+      # with manual signing onto that profile. pilot uploads to TestFlight.
+      # No -allowProvisioningUpdates anywhere — that's what exhausted the cert cap.
+      - name: Build & upload to TestFlight (fastlane)
+        env:
+          APP_STORE_CONNECT_API_KEY_ID:    ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          # API_KEY_PATH was exported into $GITHUB_ENV by the API-key step above.
+          MATCH_PASSWORD:                ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          FASTLANE_HIDE_CHANGELOG:       'true'
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: '120'
+        run: fastlane beta
+
+      - name: Dump fastlane / gym logs on failure
+        if: failure()
+        run: |
+          set +e
+          echo "===== gym build log ====="
+          tail -400 ~/Library/Logs/gym/*.log 2>/dev/null || echo "(no gym log)"
+          echo ""
+          echo "===== fastlane log ====="
+          tail -200 fastlane/*.log 2>/dev/null || true
+
+      - name: Upload build artifacts (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            build/*.ipa
+            ~/Library/Logs/gym/
+            ~/Library/Logs/DiagnosticReports/
+          retention-days: 7
+          if-no-files-found: ignore

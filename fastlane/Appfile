@@ -1,0 +1,6 @@
+app_identifier("com.Tawazon")
+team_id("97DNR5Y3Y5")
+
+# Authentication is handled by the App Store Connect API key (see Fastfile),
+# so no apple_id is needed here. Leaving it out avoids accidental interactive
+# Apple ID logins on CI.

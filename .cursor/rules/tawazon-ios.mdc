@@ -1,0 +1,149 @@
+---
+description: Tawazon iOS/watchOS App - Project conventions, architecture, design system, and coding standards
+globs:
+  - "**/*.swift"
+  - "**/*.strings"
+  - "**/*.xcstrings"
+---
+
+# Tawazon iOS App — Project Rules
+
+## Project Context
+
+Tawazon is a fitness coaching marketplace app for **iOS** (primary) and **watchOS** (companion). Users subscribe to coaches who provide training programs, diet plans, and workout content. Coaches onboard, get verified by admins, and create content for subscribers.
+
+- **Main iOS target**: `ios/tawazon/tawazon/` (SwiftUI).
+- **watchOS**: `ios/tawazon/tawazon-watch Watch App/` — keep shared behavior aligned with iOS when touching `Shared/`.
+- **Architecture reference**: `ios/APP_ARCHITECTURE.md`.
+
+### Backend Reference
+
+The backend is a Spring Boot (Java 21) project at `../Tawazon` (sibling of this repo). Use it for API contracts, validation rules, and business logic.
+
+**NEVER modify backend files** from this repo. If the API must change, describe the change for the backend team.
+
+- **Base URL (default)**: `http://63.184.58.88:8080/api/v1/`
+- **Local dev (Simulator / device on same Mac)**: `http://127.0.0.1:8080/api/v1/` or your LAN IP as appropriate.
+- **Auth**: JWT Bearer (access + refresh). Access TTL ~15 min, refresh ~7 days.
+- **Envelope**: Responses use `ApiResponse<T>` with `success`, `message`, and `data`.
+- **Pagination**: Paged payloads live under `data` as `PagedResponse<T>` (see `APIResponseModels.swift`).
+
+### Key Backend Endpoints
+
+| Area          | Endpoints |
+|---------------|-----------|
+| Auth          | `POST /auth/register`, `/auth/login`, `/auth/refresh` |
+| Users         | `GET/PUT /users/me`, `POST/GET /users/me/progress`, progress summary |
+| Dashboard     | `GET /dashboard` |
+| Coaches       | `POST/GET /coaches`, `GET/PUT /coaches/{id}`, `GET /coaches/featured`, `GET /coaches/{id}/plans` |
+| Programs      | `POST/GET /programs`, `GET/DELETE /programs/{id}`, **`GET /programs/today`**, complete/skip exercise |
+| Subscriptions | `POST/GET /subscriptions`, `PATCH /subscriptions/{id}/cancel`, **`POST /subscriptions/checkout`** |
+| Sessions      | `GET /coaches/{id}/availability`, `POST/GET /sessions`, `PATCH /sessions/{id}/cancel` |
+| Health        | `POST /health/records`, `GET /health/records/latest` |
+| Notifications | `GET /notifications`, mark read / mark all read, unread count |
+| Nutrition     | `GET /nutrition/foods/search`, `/nutrition/categories` |
+| Dishes        | `GET/POST /dishes`, `GET /dishes/search` |
+| Meals         | `POST /meals` |
+| Videos        | `POST/GET /content/videos` |
+| Storage       | `POST /storage/presigned-upload` |
+
+Full client surface: `ios/tawazon/tawazon/Services/APIService.swift`. Watch: `Shared/APIService.swift` (subset; keep in sync).
+
+## Architecture (iOS)
+
+- **UI**: SwiftUI only for new screens; prefer `NavigationStack`, `TabView`, and composable subviews.
+- **State**: `@State` / `@Binding` for local UI; `@StateObject` / `@ObservedObject` for view-owned observable models; `@EnvironmentObject` for app-wide **`ThemeManager`** and **`LanguageManager`** (see `tawazonApp.swift` / `MainView.swift`).
+- **Networking & auth**: `APIService` + `AuthManager`; tokens via **`KeychainService`** (not UserDefaults for secrets).
+- **Shared cross-platform code**: Under watch target `Shared/` — keep APIs compatible with both targets when editing shared files.
+
+### Folder Layout (iOS app)
+
+```
+ios/tawazon/tawazon/
+  Navigation/       -- MainTabNavigation, typed routes
+  DesignSystem/       -- ColorTheme, GenderColorTheme, Typography
+  Components/       -- Reusable UI (AppButton, AppCard, AppTextField, …)
+  Views/            -- Feature screens (Landing, MainView, Home, Coaches, Sessions, …)
+  ViewModels/       -- Feature VMs (Home, coach detail, sessions, health, …)
+  Services/         -- APIService, AuthManager, FileUploadManager, HealthKit, …
+  Models/           -- Codable / API models (e.g. APIResponseModels)
+  Extensions/       -- Swift/SwiftUI extensions
+  Helpers/          -- Small utilities (e.g. localization helpers)
+  Resources/        -- Localizable.strings, assets
+```
+
+Prefer **colocating** new feature views under `Views/` and shared pieces under `Components/` or `DesignSystem/`. Extract a **dedicated service** when logic is reused or testable outside the view.
+
+## Naming Conventions (Swift)
+
+- **Types**: `UpperCamelCase` (`CoachProfile`, `AuthManager`).
+- **Members**: `lowerCamelCase` (`onLoginTap`, `isLoading`).
+- **Constants**: `lowerCamelCase` static lets on enums or structs, or `SCREAMING_SNAKE_CASE` only if matching an external contract.
+- **SwiftUI views**: suffix `View` (`LoginView`, `CoachCard` as component is acceptable when it’s clearly a view).
+- **Protocols**: noun or `…ing` / `…Service` as fits (`ThemeProviding`).
+- **API DTOs**: align with backend names; use `Request` / `Response` (or generated-style names already in `APIResponseModels`) for request/response shapes.
+
+## SwiftUI Conventions
+
+- **Stateless where possible**: pass data and callbacks into child views; avoid hidden global singletons except established services (`AuthManager` as environment where used).
+- **Previews**: add `#Preview` for non-trivial screens and reusable components; inject `ThemeManager` / `LanguageManager` when the view needs them.
+- **Modifiers**: reusable styling via `ViewModifier` or extension methods (see `Typography` / `TextStyleModifier` patterns).
+- **First parameter**: for reusable components, put `View` content or primary binding first; follow existing `AppButton`-style parameter order.
+- **Accessibility**: preserve accessibility labels on interactive controls; prefer SF Symbol + `Label` when it improves clarity.
+- **RTL**: use `LanguageManager` / layout direction patterns already in the app (e.g. `RTLNavigationBackButton`); do not assume LTR-only frames.
+
+## iOS Look, Feel, and HIG Alignment
+
+- **Native first**: SF Symbols, system spacing, safe areas, and standard navigation patterns (tab bar + stack navigation).
+- **Materials**: use subtle hierarchy (cards, grouped backgrounds) consistent with **`ColorTheme`** / **`ThemeManager.dynamicColorTheme`** — avoid flat web-style layouts unless matching an existing screen.
+- **Typography**: prefer **`Typography.Style`** (and related modifiers) over ad-hoc `.font(.system(size: …))` except for fine-tuned one-offs inside components.
+- **Interaction**: use standard SwiftUI controls (`Button`, `Toggle`, `List`, `sheet`, `alert`); prefer **`AppButton`** / **`AppTextField`** / **`AppCard`** for branded consistency.
+- **Motion**: keep animations short and purposeful; respect **Reduce Motion** when adding custom transitions.
+- **watchOS**: prioritize glanceable UI, large touch targets, and complications-friendly simplicity when changing the Watch target.
+
+## Design System
+
+Dark-first fitness aesthetic aligned with the product reference ([sculpt-together.lovable.app](https://sculpt-together.lovable.app/)), implemented in Swift via **`ColorTheme`**, **`GenderColorTheme`**, and **`ThemeManager`**.
+
+### Color Tokens (reference — use code in `ColorTheme` / theme manager)
+
+| Role | Approximate hex | Usage |
+|------|-----------------|--------|
+| Lime (primary) | `#C6F135` | CTAs, accents, key highlights |
+| Lime variant | `#A8D900` | Secondary accent |
+| Lime subtle / surfaces | dark olive-tinted | Icon chips, muted fills |
+| Background | `#0A0A0B`–ish | App background |
+| Surfaces | `#1A1A1D` / `#2A2A2D` | Cards, inputs, elevated areas |
+| Text primary / secondary / tertiary | white / gray scale | Headings vs body vs hints |
+| Error / success | red / green | Semantic states |
+
+**Do not hardcode** `Color(red:green:blue:)` in new views when a token exists — extend `ColorTheme` / gender theme if a new semantic color is needed.
+
+### Component Styling (iOS mapping)
+
+- **Buttons**: branded fill using theme primary; corner radius consistent with **`AppButton`** (rounded, full-width primary actions where used today).
+- **Text fields**: filled style via **`AppTextField`** / surface colors — not Material-style underline-only fields unless matching an existing screen.
+- **Cards**: **`AppCard`** — bordered / elevated surface, consistent padding and corner radius.
+
+## Localization
+
+- **No hardcoded user-facing strings** in production UI: use keys in `Resources/Localizable.strings` (and `en.lproj` / `ar.lproj` as in the project) with **`languageManager.localize("key")`** or project helpers (`LocalizedText`, etc.).
+- **Arabic**: support RTL layout and mirrored navigation where applicable.
+
+## Code Quality
+
+1. **No unused code** — remove unused imports, types, and dead paths.
+2. **No commented-out blocks** — delete; rely on version control.
+3. **No secrets in source** — Keychain / configuration outside git for real credentials.
+4. **Errors** — surface API failures with clear, user-facing messages; avoid silent catches.
+5. **Optionals** — prefer clear unwrapping; avoid force-unwraps in production paths.
+
+## Documentation
+
+For large new areas (e.g. a new vertical feature), add a short **`README.md`** next to the feature’s views or in `ios/` describing screens, services used, and endpoints — mirroring the Android “feature README” spirit. Not required for tiny one-off views.
+
+## Git Conventions
+
+- **Commits**: imperative, concise (`add coach filter`, `fix token refresh`).
+- **Branches**: `feature/short-description`, `fix/short-description`.
+- **One logical change** per commit when practical.
